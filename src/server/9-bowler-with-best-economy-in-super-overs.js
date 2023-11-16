@@ -1,7 +1,7 @@
 //Find the bowler with the best economy in super overs
 const readCSVFile = require('./convert.js');
 
-const csvFilePath = '/home/abhishek/ipl/src/data/deliveries.csv';
+const csvFilePath = 'src/data/deliveries.csv';
 
 readCSVFile(csvFilePath).then((deliveries) => {
   var data = PerTeam(deliveries);

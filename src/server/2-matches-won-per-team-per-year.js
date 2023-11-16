@@ -2,7 +2,7 @@
 
 const readCSVFile = require('./convert.js');
 
-const csvFilePath = '/home/abhishek/ipl/src/data/matches.csv';
+const csvFilePath = 'src/data/matches.csv';
 
 readCSVFile(csvFilePath).then((matchesData) => {
   var yearwise = WonPerYear(matchesData);

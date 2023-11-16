@@ -1,5 +1,5 @@
 //Find the highest number of times one player has been dismissed by another player
-const csvFilePath = '/home/abhishek/ipl/src/data/deliveries.csv';
+const csvFilePath = 'src/data/deliveries.csv';
 const readCSVFile = require('./convert.js');
 
 readCSVFile(csvFilePath).then((deliveries) => {

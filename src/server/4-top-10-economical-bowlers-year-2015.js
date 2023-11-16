@@ -2,8 +2,8 @@
 
 const readCSVFile = require('./convert.js');
 
-const csvFilePath = '/home/abhishek/ipl/src/data/matches.csv';
-const csvFilePath2 = '/home/abhishek/ipl/src/data/deliveries.csv';
+const csvFilePath = 'src/data/matches.csv';
+const csvFilePath2 = 'src/data/deliveries.csv';
 
 readCSVFile(csvFilePath).then((matchesData) => {
   readCSVFile(csvFilePath2).then((deliveriesdata) => {

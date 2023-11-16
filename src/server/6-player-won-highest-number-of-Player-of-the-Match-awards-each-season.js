@@ -1,7 +1,7 @@
 //Find a player who has won the highest number of Player of the Match awards for each season
 const readCSVFile = require('./convert.js');
 
-const csvFilePath = '/home/abhishek/ipl/src/data/matches.csv';
+const csvFilePath = 'src/data/matches.csv';
 
 readCSVFile(csvFilePath).then((matchesData) => {
   var yearwise = Player(matchesData);

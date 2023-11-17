@@ -1,49 +1,20 @@
-//Extra runs conceded per team in the year 2016
-const readCSVFile = require('./convert.js');
-
-const csvFilePath = 'src/data/matches.csv';
-const csvFilePath2 = 'src/data/deliveries.csv';
-
-readCSVFile(csvFilePath).then((matchesData) => {
-  readCSVFile(csvFilePath2).then((deliveriesdata) => {
-    var data = PerTeam(matchesData, deliveriesdata);
-    console.log(JSON.stringify(data));
-  });
-});
-
-function PerTeam(matchesData, deliveriesdata) {
-  let data = matchesData.reduce((extra, match) => {
-    if (match.season == 2016) {
-      if (!extra[match.team1]) {
-        extra[match.team1] = 0;
+function extraRunsConcededPerTeamYear2016(
+  matchesData,
+  deliveriesdata
+) {
+  return deliveriesdata.reduce((ExtraPerTeam, ball) => {
+    if (matchesData[ball.match_id - 1].season == 2016) {
+      if (!ExtraPerTeam[ball.bowling_team]) {
+        ExtraPerTeam[ball.bowling_team] = 0;
       }
-      extra[match.team1] += deliveriesdata.reduce((run, ball) => {
-        if (
-          match.id == ball.match_id &&
-          match.team1 == ball.bowling_team
-        ) {
-          run += Number.parseInt(ball.extra_runs);
-        }
 
-        return run;
-      }, 0);
-
-      if (!extra[match.team2]) {
-        extra[match.team2] = 0;
-      }
-      extra[match.team2] += deliveriesdata.reduce((run, ball) => {
-        if (
-          match.id == ball.match_id &&
-          match.team2 == ball.bowling_team
-        ) {
-          run += Number.parseInt(ball.extra_runs);
-        }
-        return run;
-      }, 0);
+      ExtraPerTeam[ball.bowling_team] += Number.parseInt(
+        ball.extra_runs
+      );
     }
 
-    return extra;
+    return ExtraPerTeam;
   }, {});
-
-  return data;
 }
+
+module.exports = extraRunsConcededPerTeamYear2016;

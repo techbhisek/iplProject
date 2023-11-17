@@ -1,55 +1,39 @@
 //Find the strike rate of a batsman for each season
-const readCSVFile = require('./convert.js');
+function strikeRateOfaBatsmanForEachSeason(
+  matchesData,
+  deliveriesdata,
+  player = ''
+) {
+  var strick = {};
 
-const csvFilePath = 'src/data/matches.csv';
-const csvFilePath2 = 'src/data/deliveries.csv';
-
-readCSVFile(csvFilePath).then((matchesData) => {
-  readCSVFile(csvFilePath2).then((deliveriesdata) => {
-    var data = WonPerYear(matchesData, deliveriesdata);
-
-    console.log(JSON.stringify(data));
-  });
-});
-
-function WonPerYear(matchesData, deliveriesdata) {
-  let WonPerYear = matchesData.reduce((PerYear, match) => {
-    if (!PerYear[match.season]) {
-      PerYear[match.season] = PerTeam(
-        matchesData,
-        deliveriesdata,
-        match.season
-      );
+  deliveriesdata.reduce((info, ball) => {
+    var year = matchesData[ball.match_id - 1].season;
+    if (!info[ball.batsman]) {
+      info[ball.batsman] = { [year]: { run: 0, ball: 0 } };
+      strick[ball.batsman] = { [year]: 0 };
     }
-    return PerYear;
-  }, {});
-  return WonPerYear;
-}
+    if (!info[ball.batsman][year]) {
+      info[ball.batsman][year] = { run: 0, ball: 0 };
+      strick[ball.batsman][year] = 0;
+    }
 
-function PerTeam(matchesData, deliveriesdata, year) {
-  let data = matchesData.reduce((batter, match) => {
-    var infoOfBalls = deliveriesdata.reduce((batterInfo, bat) => {
-      if (bat.match_id == match.id && match.season == year) {
-        if (!batterInfo[bat.batsman]) {
-          batterInfo[bat.batsman] = {
-            run: 0,
-            ball: 0,
-            strikeRate: 0,
-          };
-        }
-        batterInfo[bat.batsman].run +=
-          parseInt(bat.noball_runs) + parseInt(bat.batsman_runs);
-        batterInfo[bat.batsman].ball += 1;
-        batterInfo[bat.batsman].strikeRate =
-          (batterInfo[bat.batsman].run /
-            batterInfo[bat.batsman].ball) *
-          100;
-      }
-      return batterInfo;
-    }, batter);
-
-    return batter;
+    info[ball.batsman][year].run += Number.parseInt(
+      ball.batsman_runs
+    );
+    if (ball.wide_runs == 0) {
+      info[ball.batsman][year].ball += 1;
+    }
+    strick[ball.batsman][year] = Math.ceil(
+      (info[ball.batsman][year].run / info[ball.batsman][year].ball) *
+        100
+    );
+    return info;
   }, {});
 
-  return data;
+  if (player != '') {
+    return { [player]: strick[player] };
+  }
+  return strick;
 }
+
+module.exports = strikeRateOfaBatsmanForEachSeason;

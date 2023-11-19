@@ -11,100 +11,72 @@ const matchesData = require('./src/data/matchesInJson.json');
 const deliveriesdata = require('./src/data/deliveriesInJson.json');
 const fs = require('fs');
 
-/* Number of matches played per year for all the years in IPL. using fs push data in json file*/
-fs.writeFileSync(
-  'src/public/output/1-matchesPerYear.json',
-  JSON.stringify(matchesPerYear(matchesData), null, 2)
-);
+output('1-matchesPerYear.json', matchesPerYear(matchesData));
 
 /* Number of matches won per team per year in IPL. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/2-matcheswonPerTeamPerYear.json',
-  JSON.stringify(matcheswonPerTeamPerYear(matchesData), null, 2)
+output(
+  '2-matcheswonPerTeamPerYear.json',
+  matcheswonPerTeamPerYear(matchesData)
 );
 
 /* Extra runs conceded per team in the year 2016. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/3-extraRunsConcededPerTeamYear2016.json',
-  JSON.stringify(
-    extraRunsConcededPerTeamYear2016(matchesData, deliveriesdata),
-    null,
-    2
-  )
+output(
+  '3-extraRunsConcededPerTeamYear2016.json',
+  extraRunsConcededPerTeamYear2016(matchesData, deliveriesdata)
 );
 
 /* Top 10 economical bowlers in the year 2015. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/4-top10EconomicalBowlersYear2015.json',
-  JSON.stringify(
-    top10EconomicalBowlersYear2015(matchesData, deliveriesdata),
-    null,
-    2
-  )
+output(
+  '4-top10EconomicalBowlersYear2015.json',
+  top10EconomicalBowlersYear2015(matchesData, deliveriesdata)
 );
 
 /* Find the number of times each team won the toss and also won the match. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/5-numberOfTimesEachTeamWonTossAndMatch.json',
-  JSON.stringify(
-    numberOfTimesEachTeamWonTossAndMatch(matchesData),
-    null,
-    2
-  )
+output(
+  '5-numberOfTimesEachTeamWonTossAndMatch.json',
+  numberOfTimesEachTeamWonTossAndMatch(matchesData)
 );
 
 /* Find a player who has won the highest number of Player of the Match awards for each season. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/6-playerWonHighestNumberOfPlayerOfTheMatchAwardsEachSeason.json',
-  JSON.stringify(
-    playerWonHighestNumberOfPlayerOfTheMatchAwardsEachSeason(
-      matchesData
-    ),
-    null,
-    2
+output(
+  '6-playerWonHighestNumberOfPlayerOfTheMatchAwardsEachSeason.json',
+  playerWonHighestNumberOfPlayerOfTheMatchAwardsEachSeason(
+    matchesData
   )
 );
 
 /* Find the strike rate of a batsman for each season. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/7-strikeRateOfaBatsmanForEachSeason.json',
-  JSON.stringify(
-    strikeRateOfaBatsmanForEachSeason(
-      matchesData,
-      deliveriesdata,
-      'MS Dhoni'
-    ),
-    null,
-    2
-  )
+output(
+  '7-strikeRateOfaBatsmanForEachSeason.json',
+
+  strikeRateOfaBatsmanForEachSeason(matchesData, deliveriesdata)
 );
 
 /* Find the highest number of times one player has been dismissed by another player. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/8-highestNumberOfTimesOnePlayerHasBeenDismissedByAnotherPlayer.json',
-  JSON.stringify(
-    highestNumberOfTimesOnePlayerHasBeenDismissedByAnotherPlayer(
-      deliveriesdata
-    ),
-    null,
-    2
+output(
+  '8-highestNumberOfTimesOnePlayerHasBeenDismissedByAnotherPlayer.json',
+  highestNumberOfTimesOnePlayerHasBeenDismissedByAnotherPlayer(
+    deliveriesdata
   )
 );
 
 /* Find the bowler with the best economy in super overs. using fs push data in json file*/
 
-fs.writeFileSync(
-  'src/public/output/9-bowlerWithBestEconomyInSuperOvers.json',
-  JSON.stringify(
-    bowlerWithBestEconomyInSuperOvers(deliveriesdata),
-    null,
-    2
-  )
+output(
+  '9-bowlerWithBestEconomyInSuperOvers.json',
+  bowlerWithBestEconomyInSuperOvers(deliveriesdata)
 );
+
+function output(file, solution) {
+  fs.writeFileSync(
+    'src/public/output/' + file,
+    JSON.stringify(solution, null, 2)
+  );
+}

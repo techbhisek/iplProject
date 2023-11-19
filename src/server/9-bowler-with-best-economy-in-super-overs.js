@@ -1,4 +1,3 @@
-//Find the bowler with the best economy in super overs
 function bowlerWithBestEconomyInSuperOvers(deliveries) {
   var playerStat = {};
 
@@ -12,6 +11,7 @@ function bowlerWithBestEconomyInSuperOvers(deliveries) {
         parseInt(ball.wide_runs) +
         parseInt(ball.noball_runs) +
         parseInt(ball.batsman_runs);
+
       if (ball.wide_runs == 0 && ball.noball_runs == 0) {
         superover[ball.bowler].ball += 1;
       }

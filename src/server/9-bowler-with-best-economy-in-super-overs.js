@@ -3,7 +3,9 @@ function bowlerWithBestEconomyInSuperOvers(deliveries) {
 
   deliveries.reduce((superover, ball) => {
     if (ball.is_super_over == 1) {
+      //checks fo the super over
       if (!superover[ball.bowler]) {
+        // creats a bowler in the data if not there.
         superover[ball.bowler] = { run: 0, ball: 0 };
         playerStat[ball.bowler] = { Economy: 0 };
       }
@@ -25,7 +27,7 @@ function bowlerWithBestEconomyInSuperOvers(deliveries) {
   var BestPlayer = { player: '', Economy: 0 };
 
   Object.entries(playerStat).reduce((best, player) => {
-    var eco = player[1].Economy;
+    var eco = player[1].Economy; // this is to find the lowest economy
 
     if (best > eco) {
       best = eco;
@@ -36,7 +38,7 @@ function bowlerWithBestEconomyInSuperOvers(deliveries) {
     return best;
   }, 10000);
 
-  return BestPlayer;
+  return BestPlayer; // returns the player with the lowest economy
 }
 
 module.exports = bowlerWithBestEconomyInSuperOvers;

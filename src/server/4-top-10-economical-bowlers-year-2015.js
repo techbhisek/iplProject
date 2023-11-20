@@ -3,7 +3,7 @@ function top10EconomicalBowlersYear2015(matchesData, deliveries) {
   deliveries.reduce((EconomyData, ball) => {
     if (matchesData[ball.match_id - 1].season == 2015) {
       /*First finding the match id of a delivery , using this same match id the season in the matchData as assuming 
-    it as array and starting index is 0 . so match==match_id -1 if it is 2016*/
+    it as array and starting index is 0 . so match==match_id if it is 2016*/
       if (!EconomyData[ball.bowler]) {
         EconomyData[ball.bowler] = { run: 0, ball: 0 }; // checking for the bowler in the object contains runs and bowles
         stats[ball.bowler] = 0; // parlally creating one for object for there economy

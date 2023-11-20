@@ -1,7 +1,7 @@
 matchesWon = require('../src/server/2-matches-won-per-team-per-year');
 toMatch1 = require('../src/public/output/2-matcheswonPerTeamPerYear.json');
 matchesData = require('../src/data/matchesInJson.json');
-deliveriesData = require('../src/data/deliveriesInJson.json');
+
 test3Data = [
   {
     id: '1',

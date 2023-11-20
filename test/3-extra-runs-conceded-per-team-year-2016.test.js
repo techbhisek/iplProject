@@ -9,31 +9,55 @@ test('is our function working proply and creating a data in file', () => {
 
 test('only single delivery so should only return bowling team and extra', () => {
   expect(
-    matches(total, [
-      {
-        match_id: '636',
-        inning: '2',
-        batting_team: 'Royal Challengers Bangalore',
-        bowling_team: 'Sunrisers Hyderabad',
-        over: '20',
-        ball: '6',
-        batsman: 'Iqbal Abdulla',
-        non_striker: 'Sachin Baby',
-        bowler: 'B Kumar',
-        is_super_over: '0',
-        wide_runs: '0',
-        bye_runs: '0',
-        legbye_runs: '0',
-        noball_runs: '0',
-        penalty_runs: '0',
-        batsman_runs: '4',
-        extra_runs: '0',
-        total_runs: '4',
-        player_dismissed: '',
-        dismissal_kind: '',
-        fielder: '',
-      },
-    ])
+    matches(
+      [
+        {
+          id: '636',
+          season: '2016',
+          city: 'Pune',
+          date: '2017-04-06',
+          team1: 'Mumbai Indians',
+          team2: 'Rising Pune Supergiant',
+          toss_winner: 'Rising Pune Supergiant',
+          toss_decision: 'field',
+          result: 'normal',
+          dl_applied: '0',
+          winner: 'Rising Pune Supergiant',
+          win_by_runs: '0',
+          win_by_wickets: '7',
+          player_of_match: 'SPD Smith',
+          venue: 'Maharashtra Cricket Association Stadium',
+          umpire1: 'A Nand Kishore',
+          umpire2: 'S Ravi',
+          umpire3: '',
+        },
+      ],
+      [
+        {
+          match_id: '636',
+          inning: '2',
+          batting_team: 'Royal Challengers Bangalore',
+          bowling_team: 'Sunrisers Hyderabad',
+          over: '20',
+          ball: '6',
+          batsman: 'Iqbal Abdulla',
+          non_striker: 'Sachin Baby',
+          bowler: 'B Kumar',
+          is_super_over: '0',
+          wide_runs: '0',
+          bye_runs: '0',
+          legbye_runs: '0',
+          noball_runs: '0',
+          penalty_runs: '0',
+          batsman_runs: '4',
+          extra_runs: '0',
+          total_runs: '4',
+          player_dismissed: '',
+          dismissal_kind: '',
+          fielder: '',
+        },
+      ]
+    )
   ).toEqual({
     'Sunrisers Hyderabad': 0,
   });
